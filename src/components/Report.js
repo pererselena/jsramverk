@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
+import Readme from '../README.md';
 
 class Report extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            questions: [],
+            questions: "",
             week: props.match.params.week
         };
     }
 
   componentDidMount() {
       let that = this;
-      fetch("https://me-api.jsramverk.me/reports/" + this.state.week)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(result) {
-          that.setState({
-              questions: result.data
-          });
-      });
+      fetch(Readme)
+      .then(res => res.text())
+      .then(text => that.setState({
+              questions: text
+          })
+      );
   }
 
   render() {
-    const renderedQuestions = this.state.questions.map((question, index) => {
-        return (
-            <div className="question" key={index}>
-                <p><strong>{ question.question }</strong></p>
-                <p>{ question.answer }</p>
-            </div>
-        )
-    });
+    return (
+        <div className="question">
+            <ReactMarkdown source={this.state.questions} />
+
+        </div>
+    );
 
     return (
         <main>
             <h2>{ this.state.week }</h2>
-            { renderedQuestions }
+
         </main>
 
 
