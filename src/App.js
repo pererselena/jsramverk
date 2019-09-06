@@ -18,8 +18,10 @@ class App extends Component {
             </ul>
           </nav>
           <Route exact path="/" component={Me} />
-          <Route path="/reports/week/:kmom" component={Report} />
+          <Route path="/reports/week/:week" component={Report} />
+          <footer></footer>
         </div>
+
       </Router>
 
     );
