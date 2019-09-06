@@ -23,19 +23,13 @@ class Report extends Component {
 
   render() {
     return (
-        <div className="question">
-            <ReactMarkdown source={this.state.questions} />
-
-        </div>
-    );
-
-    return (
         <main>
-            <h2>{ this.state.week }</h2>
+            <h2>Week { this.state.week }</h2>
+            <div className="question">
+                <ReactMarkdown source={this.state.questions} />
 
+            </div>
         </main>
-
-
     );
   }
 }
