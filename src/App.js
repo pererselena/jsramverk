@@ -12,13 +12,15 @@ class App extends Component {
             <Router>
                 <div className="App">
                     <header>
-                        <h1>JSRamverk</h1>
-                        <nav>
-                            <ul>
-                                <li><Link to="/">Me</Link></li>
-                                <li><Link to="/reports/week/1">Kmom01</Link></li>
-                            </ul>
-                        </nav>
+                        <div class="header-content">
+                            <section class="flash">
+                                <h1>JSRamverk</h1>
+                            </section>
+                            <nav>
+                                <Link to="/">Me</Link>
+                                <Link to="/reports/week/1">Kmom01</Link>
+                            </nav>
+                        </div>
                     </header>
                     <Route exact path="/" component={Me} />
                     <Route path="/reports/week/:week" component={Report} />

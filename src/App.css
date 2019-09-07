@@ -1,33 +1,144 @@
-.App {
-  text-align: center;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+html {
+    font-size: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body,
+html {
+    width: 100%;
+    height: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100%;
+    font-size: 1.3em;
+    font-family: 'Advent Pro', sans-serif;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header,
+main,
+footer {
+    flex-shrink: 0;
+}
+
+header {
+    background-color: yellow;
+    /*background-image: url('../img/bg.jpg');
+    /* background-attachment: fixed; */
+    /*background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;*/
+    padding: 350px 0;
+    -webkit-transform: skew(0deg, -10deg);
+    transform: skew(0deg, -10deg);
+    margin-top: -200px;
+    font-family: 'Syncopate', sans-serif;
+}
+
+.header-content {
+    -webkit-transform: skew(0deg, 10deg);
+    transform: skew(0deg, 10deg);
+    display: flex;
+    justify-content: space-between;
+    /* max-width: 50%; */
+}
+
+nav {
+    /* display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-self: flex-start;
+    max-width: 50%; */
+    margin-top: -130px;
+    font-size: 1.4em;
+}
+
+nav a {
+    margin-right: 1em;
+    padding: 1em;
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    padding: 1em;
+    background-color: #ffffff45;
+}
+
+.flash {
+    /* max-width: 50%; */
+    margin-top: -130px;
+}
+
+.flash h1 {
+    margin-top: 0;
+    font-size: 2em;
+    color: white;
+}
+
+main {
+    padding-top: 200px;
+    margin: 0 auto;
+    width: 900px;
+    flex-grow: 1;
+}
+
+h2,
+h3,
+h4,
+p,
+address,
+iframe {
+    margin-bottom: 1.5em;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Julius Sans One', sans-serif;
+}
+
+p,
+ul {
+    line-height: 1.4em;
+}
+
+.me {
+    float: right;
+    width: 300px;
+}
+
+
+footer {
+    background-color: #16282bf2;
+    display: flex;
+    flex-direction: column;
+    justify-content: ;
+    padding: 2em;
+}
+
+footer p {
+    color: white;
+    margin-bottom: 0;
+
+}
+
+.social {
+    align-self: center;
+}
+
+.social a {
+    color: white;
+    margin-right: 2em;
 }
