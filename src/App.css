@@ -32,12 +32,11 @@ footer {
 }
 
 header {
-    background-color: yellow;
-    /*background-image: url('../img/bg.jpg');
+    background-image: url('./img/bg.jpg');
     /* background-attachment: fixed; */
-    /*background-position: center;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;*/
+    background-size: cover;
     padding: 350px 0;
     -webkit-transform: skew(0deg, -10deg);
     transform: skew(0deg, -10deg);

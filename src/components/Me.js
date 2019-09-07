@@ -23,7 +23,7 @@ class Me extends Component {
 
                         <h2>Min me-sida i kursen jsramverk</h2>
 
-                        <p><img src={profileImg} width="500" alt="Bild på mig" /></p>
+                        <p><img className="me" src={profileImg} width="500" alt="Bild på mig" /></p>
 
                         <p>Mitt namn är Elena Perers. Född och uppvuxen i Barnaul, en stad som ligger Sydvästra Sibirien i Ryssland. Där växte jag upp, gick i skolan och universitetet.</p>
 
