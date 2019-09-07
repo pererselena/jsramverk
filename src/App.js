@@ -12,8 +12,8 @@ class App extends Component {
             <Router>
                 <div className="App">
                     <header>
-                        <div class="header-content">
-                            <section class="flash">
+                        <div className="header-content">
+                            <section className="flash">
                                 <h1>JSRamverk</h1>
                             </section>
                             <nav>
