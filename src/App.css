@@ -95,7 +95,7 @@ nav a:hover {
 
 main {
     padding-top: 200px;
-    margin: 0 auto;
+    margin: 0 auto 2em auto;
     width: 900px;
     flex-grow: 1;
 }
