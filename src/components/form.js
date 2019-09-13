@@ -1,11 +1,17 @@
 import React, {
     Component
 } from 'react';
+/*import {
+    withFormik,
+    Form,
+    Field
+} from 'formik';
+import Yup from 'yup';
+*/
 
 
 
-
-class Form extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +25,8 @@ class Form extends Component {
         that.setState({
             message:
                 <main>
+                    <h2>Registreringsformulär</h2>
+                    <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
 
                 </main>
         });
@@ -32,4 +40,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default SignUp;
