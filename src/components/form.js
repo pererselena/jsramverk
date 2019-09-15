@@ -29,8 +29,8 @@ class MyFormik extends Component {
             <Form>
                 <label>Namn:<br />
 
-                    <Field type="text" name="name" value={this.props.values.name}/>
-                    <ErrorMessage component="span" className="error" name="name"/>
+                    <Field type="text" name="name" value={this.props.values.name} />
+                    <ErrorMessage component="span" className="error" name="name" />
                 </label><br />
                 <label>Födelsedag:<br />
                     <Field component="select" name="year" value={this.props.values.year}>

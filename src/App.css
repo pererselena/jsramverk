@@ -148,14 +148,16 @@ input,
 select {
     vertical-align: middle;
     margin: 5px 10px 5px 0;
-    padding: 10px;
+    padding: 0.5em;
     background-color: #fff;
     border: 1px solid #ddd;
+    font-size: 0.9em;
 }
 
 select:focus-within,
 option:focus {
     cursor: pointer;
+    border: 2px solid #0788ef;
 }
 
 
@@ -169,19 +171,30 @@ select {
     outline: none;
     resize: none;
     transition: all 0.3s;
-    border-radius: 18px;
+    border-radius: 20px;
     border: 2px solid rgba(182, 206, 49, 0.77);
 }
 
 input:focus,
-textarea:focus {
-    border-bottom: 2px solid #ff8b66;
+select:focus {
+    border: 2px solid #0788ef;
 }
 
 input[type="checkbox"] {
     width: 10%;
-    background-color: #5a5a6e;
 }
+
+.showPassword {
+    width: 11em;
+    padding: 0.5em;
+    box-sizing: border-box;
+    background: rgba(182, 206, 49, 0.7686274509803922);
+    border-radius: 20px;
+    border: 2px solid rgba(182, 206, 49, 0.7686274509803922);
+    color: rgb(59, 58, 58);
+    font-size: 0.9em;
+}
+
 
 
 
