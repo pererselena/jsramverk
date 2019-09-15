@@ -71,7 +71,7 @@ class MyFormik extends Component {
                     Jag godkänner att mina uppgifter lagras enligt GDPR
                     <ErrorMessage component="span" className="error" name="gdpr" />
                 </label><br />
-                <button>Registrera</button>
+                <button className="btnPrimary">Registrera</button>
             </Form>
         </main>
         );

@@ -176,7 +176,8 @@ select {
 }
 
 input:focus,
-select:focus {
+select:focus,
+button:focus {
     border: 2px solid #0788ef;
 }
 
@@ -184,7 +185,8 @@ input[type="checkbox"] {
     width: 10%;
 }
 
-.showPassword {
+.showPassword,
+.btnPrimary {
     width: 11em;
     padding: 0.5em;
     box-sizing: border-box;
@@ -195,6 +197,9 @@ input[type="checkbox"] {
     font-size: 0.9em;
 }
 
+.btnPrimary {
+    align-self: flex-end;
+}
 
 
 
