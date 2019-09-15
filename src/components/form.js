@@ -64,8 +64,9 @@ class MyFormik extends Component {
                 <label>
                     <Field type="checkbox" name="gdpr" checked={this.props.gdpr} />
                     Jag godkänner att mina uppgifter lagras enligt GDPR
+                    {this.props.touched.gdpr && this.props.errors.gdpr && <p>{this.props.errors.gdpr}</p>}
                 </label><br />
-                <button >Registrera</button>
+                <button type="button">Registrera</button>
             </Form>
         </main>
         );
@@ -112,6 +113,7 @@ const SignUp = withFormik({
         name: yup.string().required("Namn är obligatoriskt"),
         email: yup.string().email("Ogiltig e-post adress").required("E-post adress är obligatoriskt"),
         password: yup.string().min(8, "Lösenordet måste vara minst 8 tecken långt").required("Lösenord är obligatoriskt"),
+        gdpr: yup.boolean().oneOf([true], "GDPR måste accepteras")
     }),
 
 
