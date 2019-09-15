@@ -19,7 +19,7 @@ class App extends Component {
                             </section>
                             <nav>
                                 <Link to="/">Me</Link>
-                                <Link to="/reports">Rapporter</Link>
+                                <Link to="/reports/">Rapporter</Link>
                                 <Link to="/sign_up">Registrera</Link>
                             </nav>
                         </div>
