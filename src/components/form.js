@@ -29,7 +29,7 @@ class MyFormik extends Component {
             <Form>
                 <label>Namn:<br />
 
-                    <Field type="text" name="name" value={this.props.values.name} />
+                    <Field type="text" name="name" className={this.props.errors.name && this.props.touched.name ? ' is-invalid' : ''} value={this.props.values.name} />
                     <ErrorMessage component="span" className="error" name="name" />
                 </label><br />
                 <label>Födelsedag:<br />
@@ -57,12 +57,12 @@ class MyFormik extends Component {
                 </label><br />
                 <label>Email:<br />
 
-                    <Field type="email" name="email" value={this.props.values.email} />
+                    <Field type="email" name="email" className={this.props.errors.email && this.props.touched.email ? ' is-invalid' : ''} value={this.props.values.email} />
                     <ErrorMessage component="span" className="error" name="email" />
                 </label><br />
                 <label>Lösenord:<br />
 
-                    <Field type={this.state.showPassword ? "text" : "password"} name="password" value={this.props.values.password} />
+                    <Field type={this.state.showPassword ? "text" : "password"} className={this.props.errors.password && this.props.touched.password ? ' is-invalid' : ''} name="password" value={this.props.values.password} />
                     <button type="button" className="showPassword" onClick={this.toggleShow}>Visa lösenord</button>
                     <ErrorMessage component="span" className="error" name="password" />
                 </label><br />

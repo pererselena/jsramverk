@@ -201,8 +201,18 @@ input[type="checkbox"] {
     align-self: flex-end;
 }
 
+.is-invalid {
+    background-color: #f3aeaec4;
+    border: 2px solid #ef2a2ac4;
+}
 
-
+.error {
+    color: #e40000;
+}
+/*input:valid {
+    background-color: #c1f3c6c4;
+    border: 2px solid #49cc56c4;
+}*/
 
 /* Style for footer.  */
 /* ------------------------------------------------------------------*/
