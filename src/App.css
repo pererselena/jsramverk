@@ -181,6 +181,11 @@ button:focus {
     border: 2px solid #0788ef;
 }
 
+input:hover,
+select:hover {
+    background-color: #cee0696b;
+}
+
 input[type="checkbox"] {
     width: 10%;
 }
@@ -201,7 +206,13 @@ input[type="checkbox"] {
     align-self: flex-end;
 }
 
-.is-invalid {
+.showPassword:hover,
+.btnPrimary:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.is-invalid,
+.is-invalid:focus {
     background-color: #f3aeaec4;
     border: 2px solid #ef2a2ac4;
 }
@@ -209,10 +220,7 @@ input[type="checkbox"] {
 .error {
     color: #e40000;
 }
-/*input:valid {
-    background-color: #c1f3c6c4;
-    border: 2px solid #49cc56c4;
-}*/
+
 
 /* Style for footer.  */
 /* ------------------------------------------------------------------*/
