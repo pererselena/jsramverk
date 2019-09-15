@@ -4,7 +4,8 @@ import React, {
 import {
     withFormik,
     Form,
-    Field
+    Field,
+    ErrorMessage
 } from 'formik';
 import * as yup from 'yup';
 
@@ -26,7 +27,7 @@ class MyFormik extends Component {
             <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
             <Form>
                 <label>Namn:<br />
-                    {this.props.touched.name && this.props.errors.name && <p>{this.props.errors.name}</p>}
+                    <ErrorMessage component="span" className="error" name="name"/>
                     <Field type="text" name="name" value={this.props.values.name}/>
 
                 </label><br />
@@ -54,17 +55,17 @@ class MyFormik extends Component {
                     </Field>
                 </label><br />
                 <label>Email:<br />
-                {this.props.touched.email && this.props.errors.email && <p>{this.props.errors.email}</p>}
+                <ErrorMessage component="span" className="error" name="email" />
                     <Field type="email" name="email" value={this.props.values.email} />
                 </label><br />
                 <label>Lösenord:<br />
-                    {this.props.touched.password && this.props.errors.password && <p>{this.props.errors.password}</p>}
+                    <ErrorMessage component="span" className="error" name="password" />
                     <Field type="password" name="password" value={this.props.values.password} />
                 </label><br />
                 <label>
                     <Field type="checkbox" name="gdpr" checked={this.props.values.gdpr} />
                     Jag godkänner att mina uppgifter lagras enligt GDPR
-                    {this.props.touched.gdpr && this.props.errors.gdpr && <p>{this.props.errors.gdpr}</p>}
+                    <ErrorMessage component="span" className="error" name="gdpr" />
                 </label><br />
                 <button>Registrera</button>
             </Form>
