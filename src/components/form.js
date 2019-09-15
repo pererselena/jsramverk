@@ -27,25 +27,25 @@ class MyFormik extends Component {
             <Form>
                 <label>Namn:<br />
                     {this.props.touched.name && this.props.errors.name && <p>{this.props.errors.name}</p>}
-                    <Field type="text" name="name" value={this.props.name}/>
+                    <Field type="text" name="name" value={this.props.values.name}/>
 
                 </label><br />
                 <label>Födelsedag:<br />
-                    <Field component="select" name="year" value={this.props.year}>
+                    <Field component="select" name="year" value={this.props.values.year}>
                         {BYear().map(year => (
                             <option key={year} value={year}>
                                 {year}
                             </option>
                         ))}
                     </Field>
-                    <Field component="select" name="month" value={this.props.month}>
+                    <Field component="select" name="month" value={this.props.values.month}>
                         {BMonth().map(month => (
                             <option key={month} value={month}>
                                 {month}
                             </option>
                         ))}
                     </Field>
-                    <Field component="select" name="day" value={this.props.day}>
+                    <Field component="select" name="day" value={this.props.values.day}>
                         {BDay().map(day => (
                             <option key={day} value={day}>
                                 {day}
@@ -55,18 +55,18 @@ class MyFormik extends Component {
                 </label><br />
                 <label>Email:<br />
                 {this.props.touched.email && this.props.errors.email && <p>{this.props.errors.email}</p>}
-                    <Field type="email" name="email" value={this.props.email} />
+                    <Field type="email" name="email" value={this.props.values.email} />
                 </label><br />
                 <label>Lösenord:<br />
                     {this.props.touched.password && this.props.errors.password && <p>{this.props.errors.password}</p>}
-                    <Field type="password" name="password" value={this.props.password} />
+                    <Field type="password" name="password" value={this.props.values.password} />
                 </label><br />
                 <label>
-                    <Field type="checkbox" name="gdpr" checked={this.props.gdpr} />
+                    <Field type="checkbox" name="gdpr" checked={this.props.values.gdpr} />
                     Jag godkänner att mina uppgifter lagras enligt GDPR
                     {this.props.touched.gdpr && this.props.errors.gdpr && <p>{this.props.errors.gdpr}</p>}
                 </label><br />
-                <button type="button">Registrera</button>
+                <button>Registrera</button>
             </Form>
         </main>
         );
@@ -117,9 +117,9 @@ const SignUp = withFormik({
     }),
 
 
-    handleSubmit: (values, { setSubmitting }) => {
+    handleSubmit: (values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            resetForm();
             setSubmitting(false);
         }, 1000);
     }
