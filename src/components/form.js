@@ -16,8 +16,9 @@ class MyFormik extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: "",
+            showPassword: false,
         };
+        this.toggleShow = this.toggleShow.bind(this);
     }
 
     render() {
@@ -27,9 +28,9 @@ class MyFormik extends Component {
             <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
             <Form>
                 <label>Namn:<br />
-                    <ErrorMessage component="span" className="error" name="name"/>
-                    <Field type="text" name="name" value={this.props.values.name}/>
 
+                    <Field type="text" name="name" value={this.props.values.name}/>
+                    <ErrorMessage component="span" className="error" name="name"/>
                 </label><br />
                 <label>Födelsedag:<br />
                     <Field component="select" name="year" value={this.props.values.year}>
@@ -55,12 +56,15 @@ class MyFormik extends Component {
                     </Field>
                 </label><br />
                 <label>Email:<br />
-                <ErrorMessage component="span" className="error" name="email" />
+
                     <Field type="email" name="email" value={this.props.values.email} />
+                    <ErrorMessage component="span" className="error" name="email" />
                 </label><br />
                 <label>Lösenord:<br />
+
+                    <Field type={this.state.showPassword ? "text" : "password"} name="password" value={this.props.values.password} />
+                    <button type="button" className="showPassword" onClick={this.toggleShow}>Visa lösenord</button>
                     <ErrorMessage component="span" className="error" name="password" />
-                    <Field type="password" name="password" value={this.props.values.password} />
                 </label><br />
                 <label>
                     <Field type="checkbox" name="gdpr" checked={this.props.values.gdpr} />
@@ -71,6 +75,9 @@ class MyFormik extends Component {
             </Form>
         </main>
         );
+    }
+    toggleShow() {
+        this.setState({ showPassword: !this.state.showPassword });
     }
 }
 
