@@ -27,9 +27,9 @@ class MyFormik extends Component {
             <h2>Registreringsformulär</h2>
             <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
             <Form>
-                <label>Namn:<br />
+                <label htmlFor="nameInput">Namn:<br />
 
-                    <Field type="text" name="name" className={this.props.errors.name && this.props.touched.name ? ' is-invalid' : ''} value={this.props.values.name} />
+                    <Field id="nameInput" type="text" name="name" className={this.props.errors.name && this.props.touched.name ? ' is-invalid' : ''} value={this.props.values.name} />
                     <ErrorMessage component="span" className="error" name="name" />
                 </label><br />
                 <label>Födelsedag:<br />
@@ -55,14 +55,13 @@ class MyFormik extends Component {
                         ))}
                     </Field>
                 </label><br />
-                <label>Email:<br />
+                <label htmlFor="emailInput">Email:<br />
 
-                    <Field type="email" name="email" className={this.props.errors.email && this.props.touched.email ? ' is-invalid' : ''} value={this.props.values.email} />
+                    <Field id="emailInput" type="email" name="email" className={this.props.errors.email && this.props.touched.email ? ' is-invalid' : ''} value={this.props.values.email} />
                     <ErrorMessage component="span" className="error" name="email" />
                 </label><br />
-                <label>Lösenord:<br />
-
-                    <Field type={this.state.showPassword ? "text" : "password"} className={this.props.errors.password && this.props.touched.password ? ' is-invalid' : ''} name="password" value={this.props.values.password} />
+                <label htmlFor="passwordInput">Lösenord:<br />
+                    <Field id="passwordInput" type={this.state.showPassword ? "text" : "password"} className={this.props.errors.password && this.props.touched.password ? ' is-invalid' : ''} name="password" value={this.props.values.password} />
                     <button type="button" className="showPassword" onClick={this.toggleShow}>Visa lösenord</button>
                     <ErrorMessage component="span" className="error" name="password" />
                 </label><br />
