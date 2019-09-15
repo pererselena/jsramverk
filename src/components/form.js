@@ -6,7 +6,7 @@ import {
     Form,
     Field
 } from 'formik';
-//import Yup from 'yup';
+import * as yup from 'yup';
 
 
 
@@ -19,57 +19,55 @@ class MyFormik extends Component {
         };
     }
 
-    componentDidMount() {
-        let that = this;
-
-        that.setState({
-            message:
-                <main>
-                    <h2>Registreringsformulär</h2>
-                    <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
-                    <Form>
-                        <label>Namn:
-                            <Field type="text" name="name" />
-                        </label>
-                        <label>Födelsedag:
-                            <Field component="select" name="year">
-                                {BYear().map(year => (
-                                    <option key={year} value={year}>
-                                        {year}
-                                    </option>
-                                ))}
-                            </Field>
-                            <Field component="select" name="month">
-                                {BMonth().map(month => (
-                                    <option key={month} value={month}>
-                                        {month}
-                                    </option>
-                                ))}
-                            </Field>
-                            <Field component="select" name="day">
-                                {BDay().map(day => (
-                                    <option key={day} value={day}>
-                                        {day}
-                                    </option>
-                                ))}
-                            </Field>
-                        </label>
-                        <label>Email:
-                            <Field type="email" name="email" />
-                        </label>
-                        <label>Lösenord:
-                            <Field type="password" name="password" />
-                        </label>
-                    </Form>
-
-                </main>
-        });
-
-    }
-
     render() {
         return (
-            this.state.message
+            <main>
+            <h2>Registreringsformulär</h2>
+            <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
+            <Form>
+                <label>Namn:<br />
+                    {this.props.touched.name && this.props.errors.name && <p>{this.props.errors.name}</p>}
+                    <Field type="text" name="name" value={this.props.name}/>
+
+                </label><br />
+                <label>Födelsedag:<br />
+                    <Field component="select" name="year" value={this.props.year}>
+                        {BYear().map(year => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
+                    </Field>
+                    <Field component="select" name="month" value={this.props.month}>
+                        {BMonth().map(month => (
+                            <option key={month} value={month}>
+                                {month}
+                            </option>
+                        ))}
+                    </Field>
+                    <Field component="select" name="day" value={this.props.day}>
+                        {BDay().map(day => (
+                            <option key={day} value={day}>
+                                {day}
+                            </option>
+                        ))}
+                    </Field>
+                </label><br />
+                <label>Email:<br />
+                {this.props.touched.email && this.props.errors.email && <p>{this.props.errors.email}</p>}
+                    <Field type="email" name="email" value={this.props.email} />
+                </label><br />
+                <label>Lösenord:<br />
+                    {this.props.touched.password && this.props.errors.password && <p>{this.props.errors.password}</p>}
+                    <Field type="password" name="password" value={this.props.password} />
+                </label><br />
+                <label>
+                    <Field type="checkbox" name="gdpr" checked={this.props.gdpr} />
+                    Jag godkänner att mina uppgifter lagras enligt GDPR
+                </label><br />
+                <button >Registrera</button>
+            </Form>
+        </main>
         );
     }
 }
@@ -98,7 +96,7 @@ function BDay() {
 }
 
 const SignUp = withFormik({
-    mapPropsToValues({name, year, month, day, email, password}) {
+    mapPropsToValues({name, year, month, day, email, password, gdpr}) {
         return{
             name: name || "",
             year: year || "",
@@ -106,31 +104,23 @@ const SignUp = withFormik({
             day: day || "",
             email: email || "",
             password: password || "",
+            gdpr: gdpr || false,
         };
-
-
-
     },
 
-    // Custom sync validation
-    validate: values => {
-        const errors = {};
+    validationSchema: yup.object().shape({
+        name: yup.string().required("Namn är obligatoriskt"),
+        email: yup.string().email("Ogiltig e-post adress").required("E-post adress är obligatoriskt"),
+        password: yup.string().min(8, "Lösenordet måste vara minst 8 tecken långt").required("Lösenord är obligatoriskt"),
+    }),
 
-        if (!values.email) {
-            errors.name = "Required";
-        }
-        console.log(errors);
-        return errors;
-    },
 
     handleSubmit: (values, { setSubmitting }) => {
         setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
         }, 1000);
-    },
-
-    displayName: "BasicForm"
+    }
 })(MyFormik);
 
 export default SignUp;
