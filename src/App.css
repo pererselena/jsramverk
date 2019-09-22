@@ -121,7 +121,8 @@ ul {
     line-height: 1.4em;
 }
 
-.me {
+.me,
+.me-article img {
     float: right;
     width: 300px;
 }
