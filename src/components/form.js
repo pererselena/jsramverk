@@ -25,7 +25,7 @@ class MyFormik extends Component {
         return (
             <main>
             <h2>Registreringsformulär</h2>
-            <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
+            <p>När du registrerar dig här kan du skriva, redigera och radera redovisningstexter i ett formulärfält.</p>
             <Form>
                 <label htmlFor="nameInput">Namn:<br />
 
@@ -128,6 +128,17 @@ const SignUp = withFormik({
         setTimeout(() => {
             resetForm();
             setSubmitting(false);
+            var data = {
+                "name": "Elena Perers",
+	            "password": "gurkburk",
+	            "email": "t@t.se",
+	            "birthday": "2009-Feb-3"
+            };
+            fetch('https://me-api.elenaperers.me/register/', {
+                method: 'POST',
+                body: data
+            });
+            console.log(data);
         }, 1000);
     }
 })(MyFormik);
