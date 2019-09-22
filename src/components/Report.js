@@ -25,12 +25,17 @@ class Report extends Component {
                 );
             }
             else {
-                fetch(Reports)
-                        .then(res => res.text())
-                        .then(text => that.setState({
-                            questions: text
-                        })
-                    );
+                fetch(`https://me-api.elenaperers.me/reports/`)
+                        .then(res => res.json())
+                        .then(function(text){
+                            let weekLink = "";
+                            text.data.map(function(data){
+                                weekLink= weekLink + `[Week ${data.week}](week/${data.week})` +"\n";
+                            });
+                            that.setState({
+                                questions: weekLink
+                            });
+                        });
             }
 
 
