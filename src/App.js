@@ -5,6 +5,7 @@ import Me from './components/Me.js';
 import Report from './components/Report.js';
 import SignUp from './components/Form.js';
 import SignIn from './components/Form-lgn.js';
+import Create from './components/Create.js';
 
 import './App.css';
 
@@ -28,6 +29,7 @@ class App extends Component {
                     <Route exact path="/" component={Me} />
                     <Route path="/reports/week/:week" component={Report} />
                     <Route exact path="/reports/" component={Report} />
+                    <Route exact path="/reports/create/" component={Create} />
                     <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
                     <footer>

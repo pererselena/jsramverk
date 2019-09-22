@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 
 class Report extends Component {
@@ -28,7 +29,7 @@ class Report extends Component {
                     .then(function(text){
                         let weekLink = "";
                         text.data.map(function(data){
-                            weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
+                            weekLink = weekLink + `[Week ${data.week}](reports/week/${data.week}) \n`;
                             return weekLink;
                         });
                         that.setState({
@@ -39,8 +40,19 @@ class Report extends Component {
     }
 
     createReport() {
+        if (this.props.match.params.week) {
+            if (localStorage.token) {
+                var week = this.props.match.params.week;
+                let editLink = "/reports/edit/" + week;
+                let deleteLink = "/reports/delete/" + week;
+                return <div><Link to={editLink}>
+                    <button className="btnPrimary" type="button">Editera</button>
+                </Link>
+                <Link to={deleteLink}><button className="btnPrimary" type="button">Radera</button></Link></div>;
+            }
+        }
         if (localStorage.token) {
-            return <button className="btnPrimary" type="button">Skapa rapport</button>;
+            return <Link to="/reports/create"><button className="btnPrimary" type="button">Skapa rapport</button></Link>;
         }
     }
 
