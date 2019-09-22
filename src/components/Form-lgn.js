@@ -81,7 +81,15 @@ const SignIn = withFormik({
             };
             fetch('https://me-api.elenaperers.me/login', {
                 method: 'POST',
-                body: data
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(function(res) {
+                localStorage.setItem("token", res.data.token);
             });
             setStatus({
                 redirectTo: true

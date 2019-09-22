@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
-import Readme from '../README.md';
-import WeekTwo from '../week2.md';
-import Reports from '../reports.md';
+
 
 class Report extends Component {
     constructor(props) {
@@ -30,7 +28,8 @@ class Report extends Component {
                         .then(function(text){
                             let weekLink = "";
                             text.data.map(function(data){
-                                weekLink= weekLink + `[Week ${data.week}](week/${data.week})` +"\n";
+                                weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
+                                return weekLink;
                             });
                             that.setState({
                                 questions: weekLink

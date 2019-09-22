@@ -136,7 +136,11 @@ const SignUp = withFormik({
             };
             fetch('https://me-api.elenaperers.me/register', {
                 method: 'POST',
-                body: data
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
             });
         }, 1000);
     }
