@@ -17,22 +17,12 @@ class Report extends Component {
             let that = this;
 
             if (that.props.match.params.week) {
-                if (that.props.match.params.week === "1") {
-                    fetch(Readme)
-                        .then(res => res.text())
-                        .then(text => that.setState({
-                            questions: text
-                        })
-                        );
-                }
-                else if (that.props.match.params.week === "2") {
-                    fetch(WeekTwo)
-                        .then(res => res.text())
-                        .then(text => that.setState({
-                            questions: text
-                        })
-                        );
-                }
+                fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
+                    .then(res => res.json())
+                    .then(text => that.setState({
+                        questions: text.data.report
+                    })
+                );
             }
             else {
                 fetch(Reports)
@@ -40,7 +30,7 @@ class Report extends Component {
                         .then(text => that.setState({
                             questions: text
                         })
-                        );
+                    );
             }
 
 
