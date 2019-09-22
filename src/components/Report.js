@@ -38,6 +38,12 @@ class Report extends Component {
         }
     }
 
+    createReport() {
+        if (localStorage.token) {
+            return <button className="btnPrimary" type="button">Skapa rapport</button>;
+        }
+    }
+
     render() {
         return (
             <main>
@@ -45,6 +51,7 @@ class Report extends Component {
                 <div className="question">
                     <ReactMarkdown source={this.state.questions} />
                 </div>
+                {this.createReport()}
             </main>
         );
     }
