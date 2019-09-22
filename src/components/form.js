@@ -1,6 +1,7 @@
 import React, {
     Component
 } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
     withFormik,
     Form,
@@ -17,11 +18,18 @@ class MyFormik extends Component {
         super(props);
         this.state = {
             showPassword: false,
+            redirectTo: false
         };
         this.toggleShow = this.toggleShow.bind(this);
     }
 
     render() {
+        if (this.props.status) {
+            const redirectTo = this.props.status.redirectTo;
+            if (redirectTo === true) {
+                return <Redirect to="/login" />;
+            }
+        }
         return (
             <main>
             <h2>Registreringsformulär</h2>
@@ -124,7 +132,7 @@ const SignUp = withFormik({
     }),
 
 
-    handleSubmit: (values, { setSubmitting, resetForm }) => {
+    handleSubmit: (values, { setSubmitting, resetForm, setStatus }) => {
         setTimeout(() => {
             resetForm();
             setSubmitting(false);
@@ -141,6 +149,9 @@ const SignUp = withFormik({
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
+            });
+            setStatus({
+                redirectTo: true
             });
         }, 1000);
     }
