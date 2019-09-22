@@ -12,45 +12,42 @@ class Report extends Component {
     }
 
     componentDidMount() {
-            let that = this;
+        let that = this;
 
-            if (that.props.match.params.week) {
-                fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
-                    .then(res => res.json())
-                    .then(text => that.setState({
-                        questions: text.data.report
-                    })
-                );
-            }
-            else {
-                fetch(`https://me-api.elenaperers.me/reports/`)
-                        .then(res => res.json())
-                        .then(function(text){
-                            let weekLink = "";
-                            text.data.map(function(data){
-                                weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
-                                return weekLink;
-                            });
-                            that.setState({
-                                questions: weekLink
-                            });
-                        });
-            }
-
-
-        }
-
-        render() {
-            return (
-                <main>
-                    <h2>Week {this.state.week}</h2>
-                    <div className="question">
-                        <ReactMarkdown source={this.state.questions} />
-
-                    </div>
-                </main>
+        if (that.props.match.params.week) {
+            fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
+                .then(res => res.json())
+                .then(text => that.setState({
+                    questions: text.data.report
+                })
             );
+        }
+        else {
+            fetch(`https://me-api.elenaperers.me/reports/`)
+                    .then(res => res.json())
+                    .then(function(text){
+                        let weekLink = "";
+                        text.data.map(function(data){
+                            weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
+                            return weekLink;
+                        });
+                        that.setState({
+                            questions: weekLink
+                        });
+                    });
         }
     }
 
-    export default Report;
+    render() {
+        return (
+            <main>
+                <h2>Week {this.state.week}</h2>
+                <div className="question">
+                    <ReactMarkdown source={this.state.questions} />
+                </div>
+            </main>
+        );
+    }
+}
+
+export default Report;
