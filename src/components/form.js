@@ -129,16 +129,15 @@ const SignUp = withFormik({
             resetForm();
             setSubmitting(false);
             var data = {
-                "name": "Elena Perers",
-	            "password": "gurkburk",
-	            "email": "t@t.se",
-	            "birthday": "2009-Feb-3"
+                name: values.name,
+                password: values.password,
+                email: values.email,
+                birthday: values.year + "-" + values.month + "-" + values.day
             };
-            fetch('https://me-api.elenaperers.me/register/', {
+            fetch('https://me-api.elenaperers.me/register', {
                 method: 'POST',
                 body: data
             });
-            console.log(data);
         }, 1000);
     }
 })(MyFormik);
