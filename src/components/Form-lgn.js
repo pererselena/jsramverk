@@ -1,7 +1,7 @@
 import React, {
     Component
 } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
     withFormik,
     Form,
@@ -9,7 +9,6 @@ import {
     ErrorMessage
 } from 'formik';
 import * as yup from 'yup';
-import SignUp from './Form.js';
 
 
 
@@ -19,11 +18,18 @@ class MyFormik extends Component {
         super(props);
         this.state = {
             showPassword: false,
+            redirectTo: false
         };
         this.toggleShow = this.toggleShow.bind(this);
     }
 
     render() {
+        if (this.props.status) {
+            const redirectTo = this.props.status.redirectTo;
+            if (redirectTo === true) {
+                return <Redirect to="/reports" />;
+            }
+        }
         return (
             <main>
             <h2>Inloggning</h2>
@@ -65,7 +71,7 @@ const SignIn = withFormik({
     }),
 
 
-    handleSubmit: (values, { setSubmitting, resetForm }) => {
+    handleSubmit: (values, { setSubmitting, resetForm, setStatus }) => {
         setTimeout(() => {
             resetForm();
             setSubmitting(false);
@@ -77,7 +83,11 @@ const SignIn = withFormik({
                 method: 'POST',
                 body: data
             });
+            setStatus({
+                redirectTo: true
+            });
         }, 1000);
+
     }
 })(MyFormik);
 
