@@ -29,7 +29,7 @@ class Report extends Component {
                     .then(function(text){
                         let weekLink = "";
                         text.data.map(function(data){
-                            weekLink = weekLink + `[Week ${data.week}](/week/${data.week}) \n`;
+                            weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
                             return weekLink;
                         });
                         that.setState({
