@@ -1,12 +1,10 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import {
     withFormik,
     Form,
     Field,
     ErrorMessage
 } from 'formik';
-import { render } from 'react-dom';
 import * as yup from 'yup';
 
 

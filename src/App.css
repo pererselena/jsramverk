@@ -146,7 +146,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
     vertical-align: middle;
     margin: 5px 10px 5px 0;
     padding: 0.5em;
@@ -164,7 +165,8 @@ option:focus {
 
 
 input,
-select {
+select,
+textarea {
     width: 15em;
     padding: 10px;
     box-sizing: border-box;
@@ -176,13 +178,20 @@ select {
     border: 2px solid rgba(182, 206, 49, 0.77);
 }
 
+textarea {
+    width: 30em;
+    height: 30em;
+}
+
 input:focus,
 select:focus,
+textarea:focus,
 button:focus {
     border: 2px solid #0788ef;
 }
 
 input:hover,
+textarea:hover,
 select:hover {
     background-color: #cee0696b;
 }
