@@ -25,7 +25,7 @@ class MyFormik extends Component {
         if (this.props.status) {
             const redirectTo = this.props.status.redirectTo;
             if (redirectTo === true) {
-                return <Redirect to="/reports" />;
+                return <Redirect to="/reports/" />;
             }
         }
         return (

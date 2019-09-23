@@ -17,29 +17,28 @@ const MyFormik = ({
     errors,
     touched
 }) => (
-        <main>
-            <h2>Editera rapport.</h2>
-            <p>Skriv din rapport i markdown.</p>
-            <Form>
-                <label htmlFor="weekNr">Veckonummer:<br />
+    <main>
+        <h2>Editera rapport.</h2>
+        <p>Skriv din rapport i markdown.</p>
+        <Form>
+            <label htmlFor="weekNr">Veckonummer:<br />
 
-                    <Field id="weekNr" type="number" name="week"
-                        className={errors.week && touched.week ? ' is-invalid' : ''}
-                        value={values.week} />
-                    <ErrorMessage component="span" className="error" name="week" />
-                </label><br />
-                <label htmlFor="report1">Rapport:<br />
-                    <Field id="report1" name="report" component="textarea" rows="10"
-                        className={errors.report && touched.report ? ' is-invalid' : ''}
-                        value={values.report}
-                    />
-                    <ErrorMessage component="span" className="error" name="report" />
-                </label><br />
-                <button className="btnPrimary">Spara</button>
-            </Form>
-        </main>
-
-    )
+                <Field id="weekNr" type="number" name="week"
+                    className={errors.week && touched.week ? ' is-invalid' : ''}
+                    value={values.week} />
+                <ErrorMessage component="span" className="error" name="week" />
+            </label><br />
+            <label htmlFor="report1">Rapport:<br />
+                <Field id="report1" name="report" component="textarea" rows="10"
+                    className={errors.report && touched.report ? ' is-invalid' : ''}
+                    value={values.report}
+                />
+                <ErrorMessage component="span" className="error" name="report" />
+            </label><br />
+            <button className="btnPrimary">Spara</button>
+        </Form>
+    </main>
+)
 
 
 const EditForm = withFormik({
@@ -65,20 +64,15 @@ const EditForm = withFormik({
                 week: values.week,
                 report: values.report
             };
-            console.log(data);
-            // fetch('https://me-api.elenaperers.me/reports', {
-            //     method: 'PUT',
-            //     headers: {
-            //         'x-access-token': localStorage.getItem("token"),
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(data)
-            // })
-            // .then(res => res.json())
-            // .then(function(res) {
-            //     console.log(res);
-            // });
+            fetch('https://me-api.elenaperers.me/reports', {
+                method: 'PUT',
+                headers: {
+                    'x-access-token': localStorage.getItem("token"),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
             setStatus({
                 redirectTo: true
             });
