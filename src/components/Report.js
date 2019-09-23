@@ -39,6 +39,33 @@ class Report extends Component {
         }
     }
 
+    componentDidUpdate() {
+        let that = this;
+
+        if (that.props.match.params.week) {
+            fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
+                .then(res => res.json())
+                .then(text => that.setState({
+                    questions: text.data.report
+                })
+            );
+        }
+        else {
+            fetch(`https://me-api.elenaperers.me/reports/`)
+                    .then(res => res.json())
+                    .then(function(text){
+                        let weekLink = "";
+                        text.data.map(function(data){
+                            weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
+                            return weekLink;
+                        });
+                        that.setState({
+                            questions: weekLink
+                        });
+                    });
+        }
+    }
+
     createReport() {
         if (this.props.match.params.week) {
             if (localStorage.token) {
