@@ -7,6 +7,7 @@ import SignUp from './components/Form.js';
 import SignIn from './components/Form-lgn.js';
 import Create from './components/Create.js';
 import Edit from './components/Edit.js';
+import Delete from './components/Delete.js';
 
 import './App.css';
 
@@ -32,6 +33,7 @@ class App extends Component {
                     <Route exact path="/reports/" component={Report} />
                     <Route exact path="/reports/create/" component={Create} />
                     <Route exact path="/reports/edit/:week" component={Edit} />
+                    <Route exact path="/reports/delete/:week" component={Delete} />
                     <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
                     <footer>
