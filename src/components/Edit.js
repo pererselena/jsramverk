@@ -1,110 +1,44 @@
-import React, {
-    Component
-} from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import {
-    withFormik,
-    Form,
-    Field,
-    ErrorMessage
-} from 'formik';
-import * as yup from 'yup';
+import EditForm from './EditForm';
 
-
-
-
-class MyFormik extends Component {
+class Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirectTo: false,
             report: "",
-            week: this.props.match.week
+            week: "",
+            redirect: false
         };
     }
 
     componentDidMount() {
-        let that = this;
-        console.log(that.props.match.params.week);
-        if (that.props.match.params.week) {
-            fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
+        if (this.props.match.params.week) {
+            fetch(`https://me-api.elenaperers.me/reports/week/${this.props.match.params.week}`)
                 .then(res => res.json())
-                .then(text => that.setState({
+                .then(text => this.setState({
                     report: text.data.report,
-                    week: that.props.match.params.week
+                    week: this.props.match.params.week
                 }));
         }
     }
 
+    callbackRedirect = (dataFromChild) => {
+        this.setState({
+            redirect: dataFromChild
+        })
+    }
+
     render() {
-        if (this.props.status) {
-            const redirectTo = this.props.status.redirectTo;
-            if (redirectTo === true) {
-                return <Redirect to="/reports" />;
-            }
+        if (this.state.redirect === true) {
+            return <Redirect to="/reports/" />;
         }
         return (
-            <main>
-            <h2>Editera rapport.</h2>
-            <p>Skriv din rapport i markdown.</p>
-            <Form>
-                <label htmlFor="weekNr">Veckonummer:<br />
+            <EditForm week={this.state.week} report={this.state.report} callbackFromParent={this.callbackRedirect} />
 
-                    <Field id="weekNr" type="number" name="week" className={this.props.errors.week && this.props.touched.week ? ' is-invalid' : ''} value={this.props.values.week} />
-                    <ErrorMessage component="span" className="error" name="week" />
-                </label><br />
-                <label htmlFor="report1">Rapport:<br />
-                    <Field id="report1" name="report" component="textarea" rows="10" className={this.props.errors.report && this.props.touched.report ? ' is-invalid' : ''} value={this.props.values.report} />
-                    <ErrorMessage component="span" className="error" name="report" />
-                </label><br />
-            <button className="btnPrimary">Spara</button>
-            </Form>
-        </main>
         );
     }
 }
 
-const Create = withFormik({
-    mapPropsToValues({week, report}) {
-        return{
-            week: week || "",
-            report: report || "",
-        };
-    },
 
-    validationSchema: yup.object().shape({
-        week: yup.string().required("Veckonummer är obligatoriskt"),
-        report: yup.string().required("Text är obligatoriskt"),
-    }),
-
-
-    handleSubmit: (values, { setSubmitting, resetForm, setStatus }) => {
-        setTimeout(() => {
-            resetForm();
-            setSubmitting(false);
-            var data = {
-                week: values.week,
-                report: values.report
-            };
-            console.log(data);
-            // fetch('https://me-api.elenaperers.me/reports', {
-            //     method: 'PUT',
-            //     headers: {
-            //         'x-access-token': localStorage.getItem("token"),
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(data)
-            // })
-            // .then(res => res.json())
-            // .then(function(res) {
-            //     console.log(res);
-            // });
-            setStatus({
-                redirectTo: true
-            });
-        }, 1000);
-    }
-})(MyFormik);
-
-export default Create;
+export default Edit;
