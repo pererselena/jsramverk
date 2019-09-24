@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import EditForm from './EditForm';
 
 class Edit extends Component {
+    _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
@@ -13,14 +14,26 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        if (this.props.match.params.week) {
-            fetch(`https://me-api.elenaperers.me/reports/week/${this.props.match.params.week}`)
+        let that = this;
+        that._isMounted = true;
+
+        if (that.props.match.params.week) {
+            fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
                 .then(res => res.json())
-                .then(text => this.setState({
-                    report: text.data.report,
-                    week: this.props.match.params.week
-                }));
+                .then(function(text) {
+                    if (that._isMounted) {
+                        that.setState({
+                            report: text.data.report,
+                            week: that.props.match.params.week
+                        });
+                    }
+                });
+
         }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     callbackRedirect = (dataFromChild) => {

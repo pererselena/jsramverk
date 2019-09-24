@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 class Report extends Component {
+    _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +15,7 @@ class Report extends Component {
 
     componentDidMount() {
         let that = this;
+        that._isMounted = true;
 
         if (that.props.match.params.week) {
             fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
@@ -32,15 +34,22 @@ class Report extends Component {
                             weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
                             return weekLink;
                         });
-                        that.setState({
-                            questions: weekLink
-                        });
+                        if (that._isMounted) {
+                            that.setState({
+                                questions: weekLink
+                            });
+                        }
                     });
         }
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     componentDidUpdate() {
         let that = this;
+        that._isMounted = true;
 
         if (that.props.match.params.week) {
             fetch(`https://me-api.elenaperers.me/reports/week/${that.props.match.params.week}`)
@@ -59,9 +68,11 @@ class Report extends Component {
                             weekLink = weekLink + `[Week ${data.week}](week/${data.week}) \n`;
                             return weekLink;
                         });
-                        that.setState({
-                            questions: weekLink
-                        });
+                        if (that._isMounted) {
+                            that.setState({
+                                questions: weekLink
+                            });
+                        }
                     });
         }
     }
