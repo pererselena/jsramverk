@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha test/**/*.js",
+    "test": "react-scripts start & mocha test/**/*.js",
     "eject": "react-scripts eject",
     "deploy": "npm run build && rsync -av build/* elena@elenaperers.me:/var/www/elenaperers.me/html/"
   },
