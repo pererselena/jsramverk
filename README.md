@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/pererselena/jsramverk.svg?branch=master)](https://travis-ci.org/pererselena/jsramverk)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pererselena/jsramverk/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pererselena/jsramverk/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/pererselena/jsramverk/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pererselena/jsramverk/build-status/master)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
