@@ -11,19 +11,19 @@ const By = webdriver.By;
 
 let browser;
 
-describe("index", function () {
+test.describe("index", function () {
+
+    this.timeout(0);
 
     beforeEach(function (done) {
-        this.timeout(20000);
         browser = new webdriver.Builder()
             .withCapabilities(webdriver.Capabilities.firefox())
             .setFirefoxOptions(new firefox.Options().headless())
             .forBrowser('firefox')
             .build();
-            //withCapabilities(webdriver.Capabilities.firefox()).build();
-
-        browser.get("http://localhost:3000/");
+        browser.get("http://localhost:3000");
         done();
+
     });
 
     afterEach(function (done) {
@@ -32,47 +32,70 @@ describe("index", function () {
     });
 
     // Test case
-    it("Test index", function (done) {
+    test.it("Test index", function (done) {
         // Check correct title
         browser.getTitle().then(function (title) {
             assert.equal(title, "React App");
         });
 
         // // Check correct heading
-        // browser.findElement(By.css("h1")).then(function (element) {
-        //     element.getText().then(function (text) {
-        //         assert.equal(text, "JSRamverk");
-        //     });
-        // });
+        browser.findElement(By.css("h1")).then(function (element) {
+            element.getText().then(function (text) {
+                assert.equal(text, "JSRamverk");
+            });
+        });
 
-        // // Check correct URL ending
-        // browser.getCurrentUrl().then(function (url) {
-        //     assert.ok(url.endsWith("/"));
-        // });
+        // Check correct URL ending
+        browser.getCurrentUrl().then(function (url) {
+            assert.ok(url.endsWith(""));
+        });
 
         done();
     });
 
 
 
-    // it("Test go to Home", function (done) {
-    //     // Use nav link to go to home page
-    //     browser.findElement(By.linkText("Rapporter")).then(function (element) {
-    //         element.click();
-    //     });
+    test.it("Test go to Reports", function (done) {
+        // Use nav link to go to reports page
+        browser.findElement(By.linkText("Rapporter")).then(function (element) {
+            element.click();
+        });
 
-    //     // Check correct heading
-    //     browser.findElement(By.css("h2")).then(function (element) {
-    //         element.getText().then(function (text) {
-    //             assert.equal(text, "Week");
-    //         });
-    //     });
+        // Check correct heading
+        browser.findElement(By.css("h2")).then(function (element) {
+            element.getText().then(function (text) {
+                assert.equal(text, "Week");
+            });
+        });
 
-    //     // Check correct URL ending
-    //     browser.getCurrentUrl().then(function (url) {
-    //         assert.ok(url.endsWith("reports/"));
-    //     });
+        // Check correct URL ending
+        browser.getCurrentUrl().then(function (url) {
+            assert.ok(url.endsWith("reports/"));
+        });
 
-    //     done();
-    // });
+        done();
+    });
+
+    test.it("Test go to Login", function (done) {
+        // Use nav link to go to login page
+        browser.findElement(By.linkText("Logga in")).then(function (element) {
+            element.click();
+        });
+
+        // Check correct heading
+        browser.findElement(By.css("h2")).then(function (element) {
+            element.getText().then(function (text) {
+                assert.equal(text, "Inloggning");
+            });
+        });
+
+        // Check correct URL ending
+        browser.getCurrentUrl().then(function (url) {
+            assert.ok(url.endsWith("login"));
+        });
+
+        done();
+    });
+
+    
 });
