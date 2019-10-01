@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha test/*.js",
+    "test": "mocha test/**/*.js",
     "eject": "react-scripts eject",
     "deploy": "npm run build && rsync -av build/* elena@elenaperers.me:/var/www/elenaperers.me/html/"
   },
@@ -36,6 +36,8 @@
   "devDependencies": {
     "http-server": "^0.11.1",
     "mocha": "^6.2.1",
-    "selenium-webdriver": "^4.0.0-alpha.5"
+    "selenium-webdriver": "^3.6.0",
+    "chromedriver": "^77.0.0",
+    "geckodriver": "^1.18.0"
   }
 }
