@@ -16,7 +16,7 @@ class Chat extends React.Component {
         this.registerUser = this.registerUser.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
 
-        this.socket = io('10.1.0.209:3005');
+        this.socket = io('https://socket.elenaperers.me:443');
 
         this.socket.on('RECEIVE_MESSAGE', function (data) {
             addMessage(data);
