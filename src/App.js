@@ -8,6 +8,7 @@ import SignIn from './components/Form-lgn.js';
 import Create from './components/Create.js';
 import Edit from './components/Edit.js';
 import Delete from './components/Delete.js';
+import Chat from './components/Chat.js';
 
 import './App.css';
 
@@ -25,6 +26,7 @@ class App extends Component {
                                 <Link to="/">Me</Link>
                                 <Link to="/reports/">Rapporter</Link>
                                 <Link to="/login">Logga in</Link>
+                                <Link to="/chat">Chat</Link>
                             </nav>
                         </div>
                     </header>
@@ -36,6 +38,7 @@ class App extends Component {
                     <Route exact path="/reports/delete/:week" component={Delete} />
                     <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
+                    <Route exact path="/chat" component={Chat} />
                     <footer>
                         <p className="social"> <a href="https://github.com/pererselena"><i className="fab fa-github fa-3x"></i></a> <a href="https://www.linkedin.com/in/elena-perers/"><i className="fab fa-linkedin-in fa-3x"></i></a></p>
                         <p className="copyright">Copyright &copy; Elena Perers 2019</p>
