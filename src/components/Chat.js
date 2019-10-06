@@ -8,8 +8,13 @@ class Chat extends React.Component {
         this.state = {
             username: '',
             message: '',
-            messages: []
+            messages: [],
+            sentName: false
         };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.registerUser = this.registerUser.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
 
         this.socket = io('10.1.0.209:3005');
 
@@ -22,18 +27,50 @@ class Chat extends React.Component {
             this.setState({ messages: [...this.state.messages, data] });
             console.log(this.state.messages);
         };
-
-        this.sendMessage = ev => {
-            ev.preventDefault();
-            this.socket.emit('SEND_MESSAGE', {
-                author: this.state.username,
-                message: this.state.message
-            })
-            this.setState({ message: '' });
-
-        }
     }
+
+    sendMessage(ev) {
+        ev.preventDefault();
+        this.socket.emit('SEND_MESSAGE', {
+            author: this.state.username,
+            message: this.state.message
+        })
+        this.setState({ message: '' });
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    registerUser() {
+        this.socket.emit('SEND_MESSAGE', {
+            author: this.state.username,
+            message: "Joined!"
+        });
+        this.setState({
+            sentName: true
+        });
+    }
+
     render() {
+        if (!this.state.sentName) {
+            return (
+                <main>
+                    <h2>Chat</h2>
+                    <div className="card-footer">
+                        <input type="text" placeholder="Username" className="form-control" name="username" onChange={this.handleInputChange} />
+                        <br />
+                        <button onClick={this.registerUser} className="btnPrimary">Registrera</button>
+                    </div>
+                </main>
+            );
+        }
         return (
             <main>
                 <h2>Chat</h2>
@@ -45,7 +82,7 @@ class Chat extends React.Component {
                     })}
                 </div>
                 <div className="card-footer">
-                    <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} className="form-control" />
+                    <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} className="form-control" disabled />
                     <br />
                     <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} />
                     <br />
