@@ -32,7 +32,7 @@ class Chat extends React.Component {
     sendMessage(ev) {
         ev.preventDefault();
         this.socket.emit('SEND_MESSAGE', {
-            author: this.state.username,
+            username: this.state.username,
             message: this.state.message
         })
         this.setState({ message: '' });
@@ -49,13 +49,20 @@ class Chat extends React.Component {
     }
 
     registerUser() {
-        this.socket.emit('SEND_MESSAGE', {
-            author: this.state.username,
+        this.socket.emit('REGISTER_USER', {
+            username: this.state.username,
             message: "Joined!"
         });
         this.setState({
             sentName: true
         });
+    }
+
+    componentWillUnmount() {
+        this.socket.emit("DISCONNECT", {
+            username: this.state.username
+        });
+        this.socket.close();
     }
 
     render() {
@@ -77,7 +84,7 @@ class Chat extends React.Component {
                 <div className="messages">
                     {this.state.messages.map((message, i) => {
                         return (
-                            <div key={i}>{message.author}: {message.message}</div>
+                            <div key={i}>{message.time} {message.username}: {message.message}</div>
                         )
                     })}
                 </div>
