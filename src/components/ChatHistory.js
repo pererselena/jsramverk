@@ -8,6 +8,8 @@ const ChatHistory = () => {
     const [title, setTitle] = useState('');
     dotenv.config();
 
+    var isMounted = true;
+
     useEffect(() => {
         var url = "";
         if (process.env.NODE_ENV === "production") {
@@ -19,9 +21,14 @@ const ChatHistory = () => {
         fetch(url)
             .then(res => res.json())
             .then(function (res) {
-                setTitle("Chatt historik");
-                setMessages(res);
+                if (isMounted) {
+                    setTitle("Chatt historik");
+                    setMessages(res);
+                }
             });
+        return function cleanup() {
+            isMounted = false;
+        }
     });
 
     return (
