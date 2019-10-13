@@ -1,5 +1,6 @@
 import React from "react";
 import io from "socket.io-client";
+import dotenv from "dotenv";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -12,11 +13,17 @@ class Chat extends React.Component {
             sentName: false
         };
 
+        dotenv.config();
+
         this.handleInputChange = this.handleInputChange.bind(this);
         this.registerUser = this.registerUser.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
 
-        this.socket = io('https://socket.elenaperers.me:443');
+        if (process.env.NODE_ENV === "production") {
+            this.socket = io('https://socket.elenaperers.me:443');
+        } else {
+            this.socket = io('http://localhost:3005');
+        }
 
         this.socket.on('RECEIVE_MESSAGE', function (data) {
             addMessage(data);
