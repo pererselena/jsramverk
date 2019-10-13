@@ -1,6 +1,7 @@
 import React from "react";
 import io from "socket.io-client";
 import dotenv from "dotenv";
+import {Link} from "react-router-dom";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -101,6 +102,8 @@ class Chat extends React.Component {
                     <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} />
                     <br />
                     <button onClick={this.sendMessage} className="btnPrimary">Skicka</button>
+                    <Link to="chat/history"><button className="btnPrimary">Historik</button></Link>
+                    
                 </div>
             </main>
         );
