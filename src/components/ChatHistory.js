@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import dotenv from "dotenv";
+import { Link } from "react-router-dom";
 
 
 
@@ -8,10 +9,10 @@ const ChatHistory = () => {
     const [title, setTitle] = useState('');
     dotenv.config();
 
-    var isMounted = true;
-
     useEffect(() => {
         var url = "";
+        var isMounted = true;
+
         if (process.env.NODE_ENV === "production") {
             url = 'https://socket.elenaperers.me/chat';
         } else {
@@ -43,6 +44,7 @@ const ChatHistory = () => {
                     ) : "Ingen historik"
                 }
             </div>
+            <Link to="/chat"><button className="btnPrimary">Tillbaka</button></Link>
         </main>
     );
 };

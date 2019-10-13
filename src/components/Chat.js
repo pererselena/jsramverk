@@ -19,6 +19,7 @@ class Chat extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.registerUser = this.registerUser.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
+        this.logout = this.logout.bind(this);
 
         if (process.env.NODE_ENV === "production") {
             this.socket = io('https://socket.elenaperers.me:443');
@@ -40,7 +41,7 @@ class Chat extends React.Component {
     sendMessage(ev) {
         ev.preventDefault();
         this.socket.emit('SEND_MESSAGE', {
-            username: this.state.username,
+            username: localStorage.getItem("username"),
             message: this.state.message
         })
         this.setState({ message: '' });
@@ -59,22 +60,35 @@ class Chat extends React.Component {
     registerUser() {
         this.socket.emit('REGISTER_USER', {
             username: this.state.username,
-            message: "Joined!"
+            message: "Kopplade upp sig!"
         });
         this.setState({
             sentName: true
         });
+        localStorage.setItem("username", this.state.username);
+    }
+
+    logout() {
+        this.socket.emit("DISCONNECT", {
+            username: localStorage.getItem("username"),
+            message: "Kopplade ner"
+        });
+        localStorage.removeItem("username");
+        this.setState({
+            username: undefined
+        })
     }
 
     componentWillUnmount() {
         this.socket.emit("DISCONNECT", {
-            username: this.state.username
+            username: localStorage.getItem("username"),
+            message: "Kopplade ner"
         });
         this.socket.close();
     }
 
     render() {
-        if (!this.state.sentName) {
+        if (!localStorage.getItem("username")) {
             return (
                 <main>
                     <h2>Chat</h2>
@@ -86,6 +100,7 @@ class Chat extends React.Component {
                 </main>
             );
         }
+        var username = localStorage.getItem("username"); 
         return (
             <main>
                 <h2>Chat</h2>
@@ -97,10 +112,11 @@ class Chat extends React.Component {
                     })}
                 </div>
                 <div className="card-footer">
-                    <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} className="form-control" disabled />
+                    <input type="text" placeholder="Username" value={username} onChange={ev => this.setState({ username: ev.target.value })} className="form-control" disabled />
                     <br />
                     <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} />
                     <br />
+                    <button onClick={this.logout} className="btnPrimary">Logga ut</button>
                     <button onClick={this.sendMessage} className="btnPrimary">Skicka</button>
                     <Link to="chat/history"><button className="btnPrimary">Historik</button></Link>
                     
